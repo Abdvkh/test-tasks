@@ -1,2 +1,2 @@
 <?php
-echo "Script worked\n";
+echo "Script worked" . date('H:i:s') . "\n";

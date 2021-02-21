@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS `visitors`(
     `visited_at` TIMESTAMP,
     `visits` INT DEFAULT 0,
     PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 EOT;
         mysqli_query($this->connection, $sql);
         $this->checkQuery();

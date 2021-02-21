@@ -1,19 +1,17 @@
 <?php
-define('UNIQUE_PRODUCTS', 0);
-
 require 'utils.php';
 
 use DB\App;
 
-$visitor_unique_id = $_SERVER['REMOTE_ADDR'] ?? $_SERVER['HTTP_USER_AGENT'];
-$visitor_hash = md5($visitor_unique_id);
+define('UNIQUE_PRODUCTS', 0);
+$config = include('config.php');
 
 $connection = mysqli_connect(
-    '127.0.0.1',
-    'root',
-    '',
-    'testtaskdb',
-    '3306'
+    $config['HOST'],
+    $config['USER'],
+    $config['PASSWORD'],
+    $config['DATABASE'],
+    $config['PORT']
 );
 
 /* check connection */

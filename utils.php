@@ -38,12 +38,11 @@ EOT;
 
     /** Checks visitor on existence in DB */
     function visitorExists(){
-        $sql = "SELECT hash, visited_at, visits FROM visitors WHERE hash='$this->visitor_hash' and DATE(visited_at)=CURDATE()";
+        $sql = "SELECT * FROM visitors WHERE hash='$this->visitor_hash' and DATE(visited_at)=CURDATE()";
         $result = mysqli_query($this->connection, $sql);
+        $this->checkQuery();
         if ($result){
             return mysqli_num_rows($result) > 0;
-        } else {
-            $this->checkQuery();
         }
     }
 

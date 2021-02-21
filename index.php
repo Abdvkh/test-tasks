@@ -1,18 +1,20 @@
 <?php
 
-include 'utils.php';
+require 'utils.php';
 
 use VisitorApp\App;
+
+$config = include('config.php');
 
 $visitor_unique_id = $_SERVER['REMOTE_ADDR'] ?? $_SERVER['HTTP_USER_AGENT'];
 $visitor_hash = md5($visitor_unique_id);
 
 $connection = mysqli_connect(
-    '127.0.0.1',
-    'root',
-    '',
-    'test',
-    '3306'
+    $config['HOST'],
+    $config['USER'],
+    $config['PASSWORD'],
+    $config['DATABASE'],
+    $config['PORT']
 );
 
 /* check connection */

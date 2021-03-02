@@ -25,6 +25,7 @@ CREATE TABLE IF NOT EXISTS `visitors`(
     `hash` VARCHAR(32) NOT NULL,
     `visited_at` TIMESTAMP,
     `visits` INT DEFAULT 0,
+	`site` VARCHAR(256) NOT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 EOT;
@@ -48,8 +49,9 @@ EOT;
 
     /** Adds visitor regarding provided hash*/
     function addVisitor(){
-        $request_time = date('Y-m-d H:i:s', $_SERVER['REQUEST_TIME']);
-        $sql = "INSERT INTO visitors(hash, visited_at) VALUES('$this->visitor_hash', '$request_time')";
+	    $request_time = date('Y-m-d H:i:s', $_SERVER['REQUEST_TIME']);
+	    $site = $_SERVER['SERVER_NAME'];
+        $sql = "INSERT INTO visitors(hash, visited_at, site) VALUES('$this->visitor_hash', '$request_time', '$site')";
         $result = mysqli_query($this->connection, $sql);
         $this->checkQuery();
         return $result;
@@ -66,7 +68,7 @@ EOT;
 
     function getAll($when=null){
         $date = $when ?? date('Y-m-d');
-        $sql = "SELECT hash, visited_at, visits FROM visitors WHERE DATE(visited_at)='$date'";
+        $sql = "SELECT hash, visited_at, visits, site FROM visitors WHERE DATE(visited_at)='$date'";
         $result = mysqli_query($this->connection, $sql);
         $this->checkQuery();
         return mysqli_fetch_all($result, MYSQLI_ASSOC);

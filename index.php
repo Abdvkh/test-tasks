@@ -1,5 +1,5 @@
 <?php
-
+header('Access-Control-Allow-Origin: *');
 require 'utils.php';
 
 use VisitorApp\App;
@@ -40,5 +40,6 @@ $visitors = $app->getAll();
     <?= 'ID: ' . $visitor['hash']
     . ' Visit time: ' . $visitor['visited_at']
     . ' Visits: ' . $visitor['visits']
+    . ' Site: ' . $visitor['site']
     . '<hr>';?>
 <?php endforeach; ?>
